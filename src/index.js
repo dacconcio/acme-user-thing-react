@@ -51,7 +51,7 @@ class Users extends React.Component {
 	}
 
 	async componentDidMount() {
-		const response = await axios.get('http://localhost:3000/users');
+		const response = await axios.get('https://quiet-waters-66809.herokuapp.com/users');
 		this.setState({ allUsers: response.data });
 		this.setState({ usersToDisplay: response.data });
 
