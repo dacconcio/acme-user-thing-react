@@ -7,13 +7,19 @@ const ListUsers = function(props) {
 		<div>
 			<div onClick={props.changeDisplayFunc}> {props.message} </div>
 
-			<div className="container" >
+			<div className="container">
 				{props.users.map(user => {
 					return (
 						<div key={user.id} className="circle">
-							<div className ="text">{user.name} </div>
+							<p />
+							<div className="text">{user.name} </div>
 							{user.things.map(thing => {
-								return <div className="text" key={thing.id}> {thing.name}</div>;
+								return (
+									<div className="text" key={thing.id}>
+										{' '}
+										{thing.name}
+									</div>
+								);
 							})}
 						</div>
 					);
@@ -51,7 +57,9 @@ class Users extends React.Component {
 	}
 
 	async componentDidMount() {
-		const response = await axios.get('https://quiet-waters-66809.herokuapp.com/users');
+		const response = await axios.get(
+			'https://quiet-waters-66809.herokuapp.com/users'
+		);
 		this.setState({ allUsers: response.data });
 		this.setState({ usersToDisplay: response.data });
 
