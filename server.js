@@ -1,5 +1,7 @@
 const sequelize = require('sequelize');
-const db = new sequelize('postgres://localhost/acme_user');
+
+const dbURL = process.env.data || 'postgres://localhost/acme_user';
+const db = new sequelize(dbURL);
 
 const User = db.define('user', {
 	name: sequelize.TEXT
@@ -19,8 +21,7 @@ db.sync({ force: true }).then(async () => {
 	const apple = await Thing.create({ name: 'Apple' });
 	const soap = await Thing.create({ name: 'Soap' });
 
-	dave.addThing(apple)
-
+	dave.addThing(apple);
 });
 
 const express = require('express');
@@ -41,4 +42,11 @@ app.get('/users', async (req, res, next) => {
 	res.send(allUsersWithThings);
 });
 
-app.listen(3000);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+	console.log(`App listening in port ${PORT}`);
+});
+
+
