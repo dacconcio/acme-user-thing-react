@@ -1,6 +1,6 @@
 const sequelize = require('sequelize');
 
-const dbURL = process.env.data || 'postgres://localhost/acme_user';
+const dbURL = process.env.DATABASE_URL || 'postgres://localhost/acme_user';
 const db = new sequelize(dbURL);
 
 const User = db.define('user', {
