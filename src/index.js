@@ -11,9 +11,9 @@ const ListUsers = function(props) {
 				{props.users.map(user => {
 					return (
 						<div key={user.id} className="circle">
-							<div>{user.name} </div>
+							<div className ="text">{user.name} </div>
 							{user.things.map(thing => {
-								return <div key={thing.id}> {thing.name}</div>;
+								return <div className="text" key={thing.id}> {thing.name}</div>;
 							})}
 						</div>
 					);
