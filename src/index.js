@@ -7,7 +7,7 @@ const ListUsers = function(props) {
 		<div>
 			<div onClick={props.changeDisplayFunc}> {props.message} </div>
 
-			<div className="container circle" >
+			<div className="container" >
 				{props.users.map(user => {
 					return (
 						<div key={user.id} className="circle">
