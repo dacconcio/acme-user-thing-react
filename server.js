@@ -31,7 +31,8 @@ db.sync({ force: true }).then(async () => {
 	const apple = await UserThing.create({ name: 'Apple' });
 	const soap = await UserThing.create({ name: 'Soap' });
 
-	dave.addThing(apple);
+	apple.setUser(dave)
+
 });
 
 const express = require('express');
@@ -46,7 +47,7 @@ app.get('/', (req, res, next) => {
 
 app.get('/users', async (req, res, next) => {
 	const allUsersWithThings = await User.findAll({
-		include: [{ model: Thing }]
+		include: [{ model: UserThing }]
 	});
 
 	res.send(allUsersWithThings);
