@@ -11,15 +11,25 @@ const Thing = db.define('thing', {
 	name: sequelize.TEXT
 });
 
-User.belongsToMany(Thing, { through: 'UserThing' });
-Thing.belongsToMany(User, { through: 'UserThing' });
+const UserThing = db.define('thing', {
+	name: sequelize.TEXT
+});
+
+//User.belongsToMany(Thing, { through: 'UserThing' });
+//Thing.belongsToMany(User, { through: 'UserThing' });
+
+UserThing.belongsTo(User);
+UserThing.belongsTo(Thing);
+User.hasMany(UserThing);
+Thing.hasMany(UserThing);
+
 
 db.sync({ force: true }).then(async () => {
 	const dave = await User.create({ name: 'Dave' });
 	const yinglu = await User.create({ name: 'Yinglu' });
 
-	const apple = await Thing.create({ name: 'Apple' });
-	const soap = await Thing.create({ name: 'Soap' });
+	const apple = await UserThing.create({ name: 'Apple' });
+	const soap = await UserThing.create({ name: 'Soap' });
 
 	dave.addThing(apple);
 });
@@ -42,11 +52,8 @@ app.get('/users', async (req, res, next) => {
 	res.send(allUsersWithThings);
 });
 
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 	console.log(`App listening in port ${PORT}`);
 });
-
-
